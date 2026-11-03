@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лапа Друга — зоомагазин для счастливых питомцев</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* ============ RESET ============ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-900: #1B4332;
+      --green-700: #2D6A4F;
+      --green-500: #40916C;
+      --green-300: #95D5B2;
+      --green-100: #D8F3DC;
+      --green-50: #EAF7EE;
+      --orange-500: #F4A261;
+      --orange-400: #F4B860;
+      --orange-100: #FDE8D3;
+      --cream: #FEFAE0;
+      --cream-dark: #F5F0D0;
+      --white: #FFFFFF;
+      --neutral-900: #1A1A1A;
+      --neutral-700: #4A4A4A;
+      --neutral-500: #7A7A7A;
+      --neutral-300: #D1D1D1;
+      --neutral-100: #F0F0F0;
+
+      --text-xs: 12px;
+      --text-sm: 16px;
+      --text-md: 20px;
+      --text-lg: 25px;
+      --text-xl: 31px;
+      --text-2xl: 39px;
+      --text-3xl: 48px;
+      --text-4xl: 60px;
+
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 40px;
+      --space-6: 48px;
+      --space-8: 64px;
+      --space-10: 80px;
+      --space-12: 96px;
+      --space-16: 128px;
+
+      --gutter: 24px;
+      --max-width: 1280px;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+
+      --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      color: var(--neutral-900);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(149, 213, 178, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(244, 162, 97, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 50% 100%, rgba(64, 145, 108, 0.12) 0%, transparent 50%),
+        var(--cream);
+      background-attachment: fixed;
+      transition: background var(--transition), color var(--transition);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ============ ФОН: ОТПЕЧАТКИ ЛАПОК ============ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%232D6A4F' fill-opacity='0.06'%3E%3Cellipse cx='60' cy='78' rx='17' ry='14'/%3E%3Cellipse cx='38' cy='52' rx='8' ry='11'/%3E%3Cellipse cx='52' cy='42' rx='8' ry='11'/%3E%3Cellipse cx='68' cy='42' rx='8' ry='11'/%3E%3Cellipse cx='82' cy='52' rx='8' ry='11'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23F4A261' fill-opacity='0.05'%3E%3Cellipse cx='80' cy='104' rx='22' ry='16'/%3E%3Cellipse cx='52' cy='72' rx='9' ry='14'/%3E%3Cellipse cx='70' cy='58' rx='9' ry='14'/%3E%3Cellipse cx='90' cy='58' rx='9' ry='14'/%3E%3Cellipse cx='108' cy='72' rx='9' ry='14'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%231B4332' fill-opacity='0.04'%3E%3Cellipse cx='40' cy='52' rx='11' ry='9'/%3E%3Cellipse cx='25' cy='34' rx='5' ry='7'/%3E%3Cellipse cx='34' cy='27' rx='5' ry='7'/%3E%3Cellipse cx='46' cy='27' rx='5' ry='7'/%3E%3Cellipse cx='55' cy='34' rx='5' ry='7'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 280px 280px, 360px 360px, 160px 160px;
+      background-position: 0 0, 140px 90px, 40px 200px;
+    }
+
+    body.dark-mode {
+      --cream: #121212;
+      --cream-dark: #1E1E1E;
+      --white: #1A1A1A;
+      --neutral-900: #F0F0F0;
+      --neutral-700: #C0C0C0;
+      --neutral-500: #909090;
+      --neutral-300: #3A3A3A;
+      --neutral-100: #2A2A2A;
+      --green-900: #95D5B2;
+      --green-700: #74C69D;
+      --green-100: #1E3A2E;
+      --green-50: #1A2E24;
+      --orange-100: #3A2A1E;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(64, 145, 108, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(244, 162, 97, 0.1) 0%, transparent 45%),
+        var(--cream);
+    }
+
+    body.dark-mode::before {
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%2395D5B2' fill-opacity='0.07'%3E%3Cellipse cx='60' cy='78' rx='17' ry='14'/%3E%3Cellipse cx='38' cy='52' rx='8' ry='11'/%3E%3Cellipse cx='52' cy='42' rx='8' ry='11'/%3E%3Cellipse cx='68' cy='42' rx='8' ry='11'/%3E%3Cellipse cx='82' cy='52' rx='8' ry='11'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23F4B860' fill-opacity='0.06'%3E%3Cellipse cx='80' cy='104' rx='22' ry='16'/%3E%3Cellipse cx='52' cy='72' rx='9' ry='14'/%3E%3Cellipse cx='70' cy='58' rx='9' ry='14'/%3E%3Cellipse cx='90' cy='58' rx='9' ry='14'/%3E%3Cellipse cx='108' cy='72' rx='9' ry='14'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%2374C69D' fill-opacity='0.05'%3E%3Cellipse cx='40' cy='52' rx='11' ry='9'/%3E%3Cellipse cx='25' cy='34' rx='5' ry='7'/%3E%3Cellipse cx='34' cy='27' rx='5' ry='7'/%3E%3Cellipse cx='46' cy='27' rx='5' ry='7'/%3E%3Cellipse cx='55' cy='34' rx='5' ry='7'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding: var(--space-10) 0;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      line-height: 1.1;
+      text-align: center;
+      margin-bottom: var(--space-8);
+      color: var(--green-900);
+    }
+
+    .section-title span { color: var(--orange-500); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: var(--text-sm);
+      transition: all var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary { background: var(--green-700); color: #fff; }
+    .btn-primary:hover {
+      background: var(--green-900);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 106, 79, 0.3);
+    }
+
+    .btn-accent { background: var(--orange-500); color: var(--neutral-900); }
+    .btn-accent:hover {
+      background: var(--orange-400);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(244, 162, 97, 0.4);
+    }
+
+    /* ============ ДЕКОРАТИВНЫЕ ЛАПКИ ============ */
+    .deco-paw {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      color: var(--green-700);
+      opacity: 0.07;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .deco-paw--tr { top: -30px; right: -20px; transform: rotate(24deg); }
+    .deco-paw--bl { bottom: -30px; left: -20px; transform: rotate(-16deg); color: var(--orange-500); }
+    .deco-paw--tl { top: -30px; left: -20px; transform: rotate(-20deg); color: var(--orange-500); }
+    .deco-paw--br { bottom: -30px; right: -20px; transform: rotate(18deg); }
+
+    .why-section .deco-paw { color: var(--orange-400); opacity: 0.12; }
+
+    .deco-paw svg { width: 100%; height: 100%; display: block; }
+
+    /* ============ HEADER ============ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(254, 250, 224, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--neutral-300);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    body.dark-mode header { background: rgba(18, 18, 18, 0.92); }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-md);
+      font-weight: 800;
+      color: var(--green-700);
+    }
+
+    .logo i { width: 28px; height: 28px; }
+
+    nav ul {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    nav a {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--neutral-700);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    nav a:hover { color: var(--green-700); }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--orange-500);
+      transition: width var(--transition);
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .header-actions button {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background var(--transition);
+      position: relative;
+    }
+
+    .header-actions button:hover { background: var(--neutral-100); }
+    .header-actions i { width: 20px; height: 20px; }
+
+    .cart-count {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--orange-500);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: var(--space-12) 0;
+      background: linear-gradient(135deg, var(--green-50) 0%, var(--cream) 60%, var(--orange-100) 100%);
+      transition: background var(--transition);
+    }
+
+    .paw {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+      animation: pawFloat 14s ease-in-out infinite;
+    }
+
+    .paw svg { width: 100%; height: 100%; display: block; }
+
+    .paw-1 {
+      width: 180px; height: 180px;
+      top: -40px; left: -20px;
+      color: var(--green-300);
+      animation-delay: 0s;
+      --rot: -18deg;
+    }
+    .paw-2 {
+      width: 160px; height: 160px;
+      bottom: 20px; right: 40px;
+      color: var(--orange-400);
+      animation-delay: -3s;
+      --rot: 22deg;
+    }
+    .paw-3 {
+      width: 90px; height: 90px;
+      top: 30%; left: 48%;
+      color: var(--green-500);
+      opacity: 0.35;
+      animation-delay: -6s;
+      --rot: 12deg;
+    }
+    .paw-4 {
+      width: 70px; height: 70px;
+      bottom: 40px; left: 30%;
+      color: var(--orange-500);
+      opacity: 0.3;
+      animation-delay: -9s;
+      --rot: -30deg;
+    }
+
+    @keyframes pawFloat {
+      0%, 100% { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+      50% { transform: translate(10px, -14px) rotate(calc(var(--rot, 0deg) + 6deg)); }
+    }
+
+    body.dark-mode .paw-1 { color: var(--green-500); }
+    body.dark-mode .paw-2 { color: var(--orange-500); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: var(--text-4xl);
+      line-height: 1.1;
+      color: var(--green-900);
+      margin-bottom: var(--space-3);
+    }
+
+    .hero h1 span { color: var(--orange-500); }
+
+    .hero p {
+      font-size: var(--text-md);
+      color: var(--neutral-700);
+      margin-bottom: var(--space-5);
+      max-width: 480px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+      background: var(--green-50);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ============ TRUST BAR ============ */
+    .trust-bar {
+      background: linear-gradient(135deg, var(--green-700) 0%, var(--green-900) 100%);
+      color: #fff;
+      padding: var(--space-4) 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      text-align: center;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: var(--text-lg);
+      line-height: 1.2;
+    }
+
+    .trust-item span {
+      font-size: var(--text-xs);
+      opacity: 0.85;
+    }
+
+    /* ============ CATEGORIES ============ */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .category-card {
+      background: linear-gradient(135deg, var(--white) 0%, var(--green-50) 100%);
+      border-radius: var(--radius-md);
+      padding: var(--space-5) var(--space-4);
+      text-align: center;
+      transition: all var(--transition);
+      border: 1px solid var(--neutral-300);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -40%;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(244, 162, 97, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      transition: transform var(--transition);
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      border-color: var(--green-300);
+    }
+
+    .category-card:hover::before { transform: scale(1.5); }
+
+    .category-card i {
+      width: 48px; height: 48px;
+      color: var(--green-700);
+      margin-bottom: var(--space-2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .category-card h3 {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--neutral-900);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ PRODUCTS ============ */
+    #products {
+      background: linear-gradient(135deg, var(--green-50) 0%, var(--cream-dark) 100%);
+      border-radius: var(--radius-lg);
+      margin: 0 var(--space-3);
+      transition: background var(--transition);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--neutral-300);
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-image {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--neutral-100);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition);
+    }
+
+    .product-card:hover .product-image img { transform: scale(1.05); }
+
+    .badge {
+      position: absolute;
+      top: var(--space-1);
+      left: var(--space-1);
+      background: var(--orange-500);
+      color: var(--neutral-900);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .product-info {
+      padding: var(--space-2);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      flex: 1;
+    }
+
+    .product-info h3 {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: var(--text-xs);
+      color: var(--orange-500);
+    }
+
+    .product-rating span { color: var(--neutral-500); }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: var(--space-1);
+    }
+
+    .product-price strong {
+      font-size: var(--text-md);
+      color: var(--green-700);
+    }
+
+    .add-to-cart {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--green-700);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .add-to-cart:hover {
+      background: var(--orange-500);
+      transform: scale(1.1);
+    }
+
+    .add-to-cart i { width: 18px; height: 18px; }
+
+    /* ============ SERVICES ============ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      border: 1px solid var(--neutral-300);
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .service-card:hover {
+      border-color: var(--orange-500);
+      box-shadow: 0 8px 24px rgba(244, 162, 97, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .service-card i {
+      width: 32px; height: 32px;
+      color: var(--orange-500);
+    }
+
+    .service-card h3 {
+      font-size: var(--text-md);
+      color: var(--green-900);
+    }
+
+    .service-card p {
+      color: var(--neutral-700);
+      font-size: var(--text-sm);
+      flex: 1;
+    }
+
+    .service-card .price {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--green-700);
+    }
+
+    /* ============ WHY US ============ */
+    .why-section {
+      background: linear-gradient(135deg, var(--green-700) 0%, var(--green-900) 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      margin: 0 var(--space-3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-section .section-title { color: #fff; }
+    .why-section .why-item h3 { color: #fff; }
+    .why-section .why-item p { color: rgba(255, 255, 255, 0.8); }
+    .why-section .why-item i { color: var(--orange-400); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-item i {
+      width: 36px; height: 36px;
+      margin-bottom: var(--space-1);
+    }
+
+    .why-item h3 {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .why-item p { font-size: var(--text-xs); }
+
+    /* ============ FAQ ============ */
+    .faq-list { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .faq-item { border-bottom: 1px solid var(--neutral-300); }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3) 0;
+      font-weight: 600;
+      font-size: var(--text-sm);
+      text-align: left;
+      color: var(--neutral-900);
+      transition: color var(--transition);
+    }
+
+    .faq-question:hover { color: var(--green-700); }
+
+    .faq-question i {
+      width: 20px; height: 20px;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+      color: var(--orange-500);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease, padding 300ms ease;
+      color: var(--neutral-700);
+      font-size: var(--text-sm);
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding-bottom: var(--space-3);
+    }
+
+    /* ============ CTA ============ */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-700) 0%, var(--green-900) 100%);
+      color: #fff;
+      text-align: center;
+      border-radius: var(--radius-lg);
+      padding: var(--space-10) var(--space-4);
+      margin: var(--space-10) auto;
+      max-width: var(--max-width);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(244, 162, 97, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section > * { position: relative; z-index: 1; }
+
+    .cta-section h2 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-2);
+    }
+
+    .cta-section p {
+      opacity: 0.9;
+      margin-bottom: var(--space-4);
+      font-size: var(--text-md);
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(64, 145, 108, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 100%, rgba(244, 162, 97, 0.12) 0%, transparent 50%),
+        var(--neutral-900);
+      color: var(--neutral-300);
+      padding: var(--space-8) 0 var(--space-4);
+      margin-top: var(--space-10);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    body.dark-mode footer { background: #0A0A0A; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-brand .logo {
+      color: var(--green-300);
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-brand p {
+      font-size: var(--text-xs);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .footer-col a {
+      font-size: var(--text-xs);
+      transition: color var(--transition);
+    }
+
+    .footer-col a:hover { color: var(--orange-500); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: var(--space-3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--text-xs);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ CART MODAL ============ */
+    .cart-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3);
+    }
+
+    .cart-modal.open { display: flex; }
+
+    .cart-content {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 480px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3);
+      border-bottom: 1px solid var(--neutral-300);
+    }
+
+    .cart-header h3 {
+      font-size: var(--text-md);
+      color: var(--green-900);
+    }
+
+    .cart-header button {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .cart-header button:hover { background: var(--neutral-100); }
+
+    .cart-items {
+      padding: var(--space-2);
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--neutral-100);
+    }
+
+    .cart-item img {
+      width: 56px; height: 56px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+    }
+
+    .cart-item-info { flex: 1; }
+    .cart-item-info h4 { font-size: var(--text-sm); }
+    .cart-item-info p { font-size: var(--text-xs); color: var(--neutral-500); }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .cart-item-controls button {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--neutral-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: all var(--transition);
+    }
+
+    .cart-item-controls button:hover {
+      background: var(--green-700);
+      color: #fff;
+      border-color: var(--green-700);
+    }
+
+    .cart-footer {
+      padding: var(--space-3);
+      border-top: 1px solid var(--neutral-300);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: var(--text-md);
+      margin-bottom: var(--space-2);
+      color: var(--green-900);
+    }
+
+    .cart-footer .btn { width: 100%; }
+
+    .cart-empty {
+      text-align: center;
+      padding: var(--space-8);
+      color: var(--neutral-500);
+    }
+
+    /* ============ SCROLL TOP ============ */
+    .scroll-top {
+      position: fixed;
+      bottom: var(--space-3);
+      right: var(--space-3);
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--green-700);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition);
+      z-index: 50;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+    .scroll-top:hover { background: var(--orange-500); transform: translateY(-4px); }
+
+    /* ============ ANIMATIONS ============ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin: 0 auto var(--space-5); }
+      .hero-buttons { justify-content: center; }
+      .hero-image { max-width: 560px; margin: 0 auto; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --text-4xl: 39px;
+        --text-3xl: 31px;
+        --text-2xl: 25px;
+      }
+      nav { display: none; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+      .footer-bottom { flex-direction: column; gap: var(--space-1); text-align: center; }
+      .section { padding: var(--space-8) 0; }
+      #products, .why-section { margin: 0; border-radius: 0; }
+      .paw-1 { width: 120px; height: 120px; }
+      .paw-2 { width: 110px; height: 110px; }
+      .paw-3, .paw-4 { display: none; }
+      .deco-paw { width: 100px; height: 100px; }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .categories-grid { grid-template-columns: 1fr 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <i data-lucide="paw-print"></i>
+        Лапа Друга
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#categories">Категории</a></li>
+          <li><a href="#products">Хиты</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" aria-label="Сменить тему">
+          <i data-lucide="moon"></i>
+        </button>
+        <button id="cartBtn" aria-label="Открыть корзину">
+          <i data-lucide="shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="paw paw-1">
+      <svg viewBox="0 0 120 120" fill="currentColor">
+        <ellipse cx="60" cy="78" rx="17" ry="14"/>
+        <ellipse cx="38" cy="52" rx="8" ry="11"/>
+        <ellipse cx="52" cy="42" rx="8" ry="11"/>
+        <ellipse cx="68" cy="42" rx="8" ry="11"/>
+        <ellipse cx="82" cy="52" rx="8" ry="11"/>
+      </svg>
+    </div>
+    <div class="paw paw-2">
+      <svg viewBox="0 0 160 160" fill="currentColor">
+        <ellipse cx="80" cy="104" rx="22" ry="16"/>
+        <ellipse cx="52" cy="72" rx="9" ry="14"/>
+        <ellipse cx="70" cy="58" rx="9" ry="14"/>
+        <ellipse cx="90" cy="58" rx="9" ry="14"/>
+        <ellipse cx="108" cy="72" rx="9" ry="14"/>
+      </svg>
+    </div>
+    <div class="paw paw-3">
+      <svg viewBox="0 0 120 120" fill="currentColor">
+        <ellipse cx="60" cy="78" rx="17" ry="14"/>
+        <ellipse cx="38" cy="52" rx="8" ry="11"/>
+        <ellipse cx="52" cy="42" rx="8" ry="11"/>
+        <ellipse cx="68" cy="42" rx="8" ry="11"/>
+        <ellipse cx="82" cy="52" rx="8" ry="11"/>
+      </svg>
+    </div>
+    <div class="paw paw-4">
+      <svg viewBox="0 0 160 160" fill="currentColor">
+        <ellipse cx="80" cy="104" rx="22" ry="16"/>
+        <ellipse cx="52" cy="72" rx="9" ry="14"/>
+        <ellipse cx="70" cy="58" rx="9" ry="14"/>
+        <ellipse cx="90" cy="58" rx="9" ry="14"/>
+        <ellipse cx="108" cy="72" rx="9" ry="14"/>
+      </svg>
+    </div>
+
+    <div class="container hero-grid">
+      <div>
+        <h1>Всё для <span>счастливых</span> питомцев</h1>
+        <p>Корма, игрушки и забота от экспертов. Доставим за 24 часа и поможем выбрать лучшее для вашего друга.</p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary">
+            <i data-lucide="shopping-bag"></i> В магазин
+          </a>
+          <a href="#services" class="btn btn-accent">
+            <i data-lucide="calendar"></i> Записаться на груминг
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="01.png" alt="Счастливая собака и кошка" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST BAR ============ -->
+  <div class="trust-bar">
+    <div class="container trust-grid">
+      <div class="trust-item"><strong>10 000+</strong><span>довольных клиентов</span></div>
+      <div class="trust-item"><strong>4.9 ★</strong><span>средняя оценка</span></div>
+      <div class="trust-item"><strong>24 часа</strong><span>доставка по городу</span></div>
+      <div class="trust-item"><strong>100%</strong><span>натуральные корма</span></div>
+    </div>
+  </div>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="section" id="categories">
+    <div class="deco-paw deco-paw--tr">
+      <svg viewBox="0 0 120 120" fill="currentColor">
+        <ellipse cx="60" cy="78" rx="17" ry="14"/>
+        <ellipse cx="38" cy="52" rx="8" ry="11"/>
+        <ellipse cx="52" cy="42" rx="8" ry="11"/>
+        <ellipse cx="68" cy="42" rx="8" ry="11"/>
+        <ellipse cx="82" cy="52" rx="8" ry="11"/>
+      </svg>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Выберите <span>категорию</span></h2>
+      <div class="categories-grid">
+        <div class="category-card fade-in">
+          <i data-lucide="utensils"></i>
+          <h3>Корм</h3>
+        </div>
+        <div class="category-card fade-in">
+          <i data-lucide="gamepad-2"></i>
+          <h3>Игрушки</h3>
+        </div>
+        <div class="category-card fade-in">
+          <i data-lucide="scissors"></i>
+          <h3>Уход</h3>
+        </div>
+        <div class="category-card fade-in">
+          <i data-lucide="bone"></i>
+          <h3>Лакомства</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section class="section" id="products">
+    <div class="deco-paw deco-paw--bl">
+      <svg viewBox="0 0 160 160" fill="currentColor">
+        <ellipse cx="80" cy="104" rx="22" ry="16"/>
+        <ellipse cx="52" cy="72" rx="9" ry="14"/>
+        <ellipse cx="70" cy="58" rx="9" ry="14"/>
+        <ellipse cx="90" cy="58" rx="9" ry="14"/>
+        <ellipse cx="108" cy="72" rx="9" ry="14"/>
+      </svg>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Хиты <span>продаж</span></h2>
+      <div class="products-grid">
+        <!-- Карточка 1 → 02.png -->
+        <article class="product-card fade-in">
+          <div class="product-image">
+            <span class="badge">Хит</span>
+            <img src="02.png" alt="Корм для кошек" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Корм для кошек Premium</h3>
+            <div class="product-rating">★★★★★ <span>(128)</span></div>
+            <div class="product-price">
+              <strong>1 290 ₽</strong>
+              <button class="add-to-cart" onclick="addToCart('Корм для кошек Premium', 1290, '02.png')">
+                <i data-lucide="plus"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 2 → 03.png -->
+        <article class="product-card fade-in">
+          <div class="product-image">
+            <span class="badge">-20%</span>
+            <img src="03.png" alt="Игрушка для собак" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Игрушка-канат для собак</h3>
+            <div class="product-rating">★★★★☆ <span>(86)</span></div>
+            <div class="product-price">
+              <strong>590 ₽</strong>
+              <button class="add-to-cart" onclick="addToCart('Игрушка-канат для собак', 590, '03.png')">
+                <i data-lucide="plus"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 3 → 04.png -->
+        <article class="product-card fade-in">
+          <div class="product-image">
+            <img src="04.png" alt="Лежанка для кошек" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Лежанка уютная для кошек</h3>
+            <div class="product-rating">★★★★★ <span>(54)</span></div>
+            <div class="product-price">
+              <strong>1 890 ₽</strong>
+              <button class="add-to-cart" onclick="addToCart('Лежанка уютная для кошек', 1890, '04.png')">
+                <i data-lucide="plus"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 4 → 05.png -->
+        <article class="product-card fade-in">
+          <div class="product-image">
+            <span class="badge">Новинка</span>
+            <img src="05.png" alt="Лакомство для собак" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Лакомство натуральное</h3>
+            <div class="product-rating">★★★★☆ <span>(92)</span></div>
+            <div class="product-price">
+              <strong>390 ₽</strong>
+              <button class="add-to-cart" onclick="addToCart('Лакомство натуральное', 390, '05.png')">
+                <i data-lucide="plus"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="deco-paw deco-paw--tl">
+      <svg viewBox="0 0 120 120" fill="currentColor">
+        <ellipse cx="60" cy="78" rx="17" ry="14"/>
+        <ellipse cx="38" cy="52" rx="8" ry="11"/>
+        <ellipse cx="52" cy="42" rx="8" ry="11"/>
+        <ellipse cx="68" cy="42" rx="8" ry="11"/>
+        <ellipse cx="82" cy="52" rx="8" ry="11"/>
+      </svg>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Наши <span>услуги</span></h2>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <i data-lucide="scissors"></i>
+          <h3>Груминг</h3>
+          <p>Стрижка, мытьё и уход за шерстью. Профессиональные грумеры с опытом от 5 лет.</p>
+          <span class="price">от 1 500 ₽</span>
+          <button class="btn btn-accent">Записаться</button>
+        </div>
+        <div class="service-card fade-in">
+          <i data-lucide="stethoscope"></i>
+          <h3>Ветеринар</h3>
+          <p>Осмотр, вакцинация и консультации. Врачи с профильным образованием.</p>
+          <span class="price">от 800 ₽</span>
+          <button class="btn btn-accent">Записаться</button>
+        </div>
+        <div class="service-card fade-in">
+          <i data-lucide="home"></i>
+          <h3>Передержка</h3>
+          <p>Присмотрим за питомцем, пока вы в отъезде. Просторные вольеры и прогулки.</p>
+          <span class="price">от 600 ₽/день</span>
+          <button class="btn btn-accent">Записаться</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US ============ -->
+  <section class="section why-section">
+    <div class="deco-paw deco-paw--tr">
+      <svg viewBox="0 0 160 160" fill="currentColor">
+        <ellipse cx="80" cy="104" rx="22" ry="16"/>
+        <ellipse cx="52" cy="72" rx="9" ry="14"/>
+        <ellipse cx="70" cy="58" rx="9" ry="14"/>
+        <ellipse cx="90" cy="58" rx="9" ry="14"/>
+        <ellipse cx="108" cy="72" rx="9" ry="14"/>
+      </svg>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Почему <span>мы</span></h2>
+      <div class="why-grid">
+        <div class="why-item fade-in">
+          <i data-lucide="truck"></i>
+          <h3>Быстрая доставка</h3>
+          <p>Привезём за 24 часа по городу</p>
+        </div>
+        <div class="why-item fade-in">
+          <i data-lucide="shield-check"></i>
+          <h3>Гарантия качества</h3>
+          <p>Только проверенные бренды</p>
+        </div>
+        <div class="why-item fade-in">
+          <i data-lucide="heart-handshake"></i>
+          <h3>Забота о питомцах</h3>
+          <p>Поможем с выбором 24/7</p>
+        </div>
+        <div class="why-item fade-in">
+          <i data-lucide="rotate-ccw"></i>
+          <h3>Легкий возврат</h3>
+          <p>14 дней на обмен и возврат</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="deco-paw deco-paw--br">
+      <svg viewBox="0 0 120 120" fill="currentColor">
+        <ellipse cx="60" cy="78" rx="17" ry="14"/>
+        <ellipse cx="38" cy="52" rx="8" ry="11"/>
+        <ellipse cx="52" cy="42" rx="8" ry="11"/>
+        <ellipse cx="68" cy="42" rx="8" ry="11"/>
+        <ellipse cx="82" cy="52" rx="8" ry="11"/>
+      </svg>
+    </div>
+    <div class="container">
+      <h2 class="section-title">Частые <span>вопросы</span></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            Как быстро вы доставляете?
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-answer">По городу — в течение 24 часов. По России — от 2 до 5 дней в зависимости от региона.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Можно ли вернуть товар?
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-answer">Да, в течение 14 дней с момента покупки, если товар не был в использовании и сохранена упаковка.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Нужна ли предварительная запись на груминг?
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-answer">Да, запись обязательна. Вы можете записаться по телефону или через форму на сайте.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Делаете ли вы прививки?
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-answer">Да, ветеринарный кабинет работает ежедневно. Прививки делаются по предварительной записи после осмотра врача.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <div class="container">
+    <section class="cta-section">
+      <h2>Получите скидку 10% на первый заказ</h2>
+      <p>Подпишитесь на рассылку — и мы пришлём промокод на почту</p>
+      <form style="display: flex; gap: 8px; max-width: 400px; margin: 0 auto; flex-wrap: wrap; justify-content: center;" onsubmit="event.preventDefault(); alert('Спасибо за подписку! Промокод: LAPA10'); this.reset();">
+        <input type="email" placeholder="Ваш email" required style="flex: 1; min-width: 200px; padding: 16px; border-radius: 8px; border: none; font-size: 16px;">
+        <button type="submit" class="btn btn-accent">Подписаться</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="deco-paw" style="width: 200px; height: 200px; top: -60px; right: 5%; color: var(--green-300); opacity: 0.06; transform: rotate(18deg);">
+      <svg viewBox="0 0 160 160" fill="currentColor">
+        <ellipse cx="80" cy="104" rx="22" ry="16"/>
+        <ellipse cx="52" cy="72" rx="9" ry="14"/>
+        <ellipse cx="70" cy="58" rx="9" ry="14"/>
+        <ellipse cx="90" cy="58" rx="9" ry="14"/>
+        <ellipse cx="108" cy="72" rx="9" ry="14"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo"><i data-lucide="paw-print"></i> Лапа Друга</a>
+          <p>Зоомагазин с заботой о каждом питомце. Работаем с 2015 года.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Магазин</h4>
+          <ul>
+            <li><a href="#products">Хиты продаж</a></li>
+            <li><a href="#categories">Категории</a></li>
+            <li><a href="#services">Услуги</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Помощь</h4>
+          <ul>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#">Доставка</a></li>
+            <li><a href="#">Возврат</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="tel:+71234567890">+7 (123) 456-78-90</a></li>
+            <li><a href="mailto:hello@lapadruga.ru">hello@lapadruga.ru</a></li>
+            <li><a href="#">Москва, ул. Зоологическая, 1</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Лапа Друга. Все права защищены.</span>
+        <span>Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ CART MODAL ============ -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h3>Корзина</h3>
+        <button onclick="toggleCart()" aria-label="Закрыть">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Итого:</span>
+          <span id="cartTotal">0 ₽</span>
+        </div>
+        <button class="btn btn-primary" onclick="alert('Заказ оформлен! Спасибо!'); cart = []; updateCart(); toggleCart();">
+          Оформить заказ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCROLL TOP ============ -->
+  <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <script>
+    lucide.createIcons();
+
+    // ============ КОРЗИНА ============
+    let cart = JSON.parse(localStorage.getItem('lapa_cart')) || [];
+
+    function addToCart(name, price, image) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ name, price, image, quantity: 1 });
+      }
+      updateCart();
+      const btn = event.target.closest('.add-to-cart');
+      if (btn) {
+        btn.style.background = '#F4A261';
+        btn.innerHTML = '<i data-lucide="check"></i>';
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.style.background = '';
+          btn.innerHTML = '<i data-lucide="plus"></i>';
+          lucide.createIcons();
+        }, 800);
+      }
+    }
+
+    function updateCart() {
+      localStorage.setItem('lapa_cart', JSON.stringify(cart));
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartCount').textContent = count;
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
+
+      if (cart.length === 0) {
+        container.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+        totalEl.textContent = '0 ₽';
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = cart.map((item, i) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        return `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-info">
+              <h4>${item.name}</h4>
+              <p>${item.price} ₽ × ${item.quantity}</p>
+            </div>
+            <div class="cart-item-controls">
+              <button onclick="changeQty(${i}, -1)">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQty(${i}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      totalEl.textContent = total.toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function changeQty(index, delta) {
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCart();
+    }
+
+    function toggleCart() {
+      document.getElementById('cartModal').classList.toggle('open');
+    }
+
+    document.getElementById('cartBtn').addEventListener('click', toggleCart);
+
+    document.getElementById('cartModal').addEventListener('click', function(e) {
+      if (e.target === this) toggleCart();
+    });
+
+    // ============ ТЁМНАЯ ТЕМА ============
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('lapa_theme');
+
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i data-lucide="sun"></i>';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('lapa_theme', isDark ? 'dark' : 'light');
+      themeToggle.innerHTML = isDark ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+      lucide.createIcons();
+    });
+
+    // ============ FAQ ============
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const wasActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!wasActive) item.classList.add('active');
+      });
+    });
+
+    // ============ SCROLL TOP ============
+    const scrollTopBtn = document.getElementById('scrollTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ============ FADE IN ============
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ============ ИНИЦИАЛИЗАЦИЯ ============
+    updateCart();
+  </script>
+
+</body>
+</html>
